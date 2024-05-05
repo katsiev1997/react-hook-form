@@ -6,7 +6,12 @@ interface IMyForm {
   age: number;
 }
 function App() {
-  const { register, handleSubmit } = useForm<IMyForm>({
+  const {
+    register,
+    handleSubmit,
+    clearErrors,
+    formState: { errors },
+  } = useForm<IMyForm>({
     defaultValues: {
       age: 18,
     },
@@ -23,9 +28,16 @@ function App() {
   return (
     <>
       <form action="" onSubmit={handleSubmit(submit, error)}>
-        <input type="text" {...register("name", { required: true })} />
+        <input
+          type="text"
+          {...register("name", { required: true })}
+          aria-invalid={errors.name ? true : false}
+        />
         <input type="number" {...register("age")} />
         <button>Отправить</button>
+        <button type="button" onClick={() => clearErrors()}>
+          Очистить ошибки
+        </button>
       </form>
     </>
   );
