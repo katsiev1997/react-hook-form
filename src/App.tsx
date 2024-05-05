@@ -1,4 +1,4 @@
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import "./App.css";
 
 interface IMyForm {
@@ -15,10 +15,15 @@ function App() {
   const submit: SubmitHandler<IMyForm> = (data) => {
     console.log(data);
   };
+
+  const error: SubmitErrorHandler<IMyForm> = (data) => {
+    console.log(data);
+  };
+
   return (
     <>
-      <form action="" onSubmit={handleSubmit(submit)}>
-        <input type="text" {...register("name")} />
+      <form action="" onSubmit={handleSubmit(submit, error)}>
+        <input type="text" {...register("name", { required: true })} />
         <input type="number" {...register("age")} />
         <button>Отправить</button>
       </form>
