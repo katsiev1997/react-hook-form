@@ -1,4 +1,4 @@
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import "./App.css";
 
 interface IMyForm {
@@ -9,6 +9,7 @@ function App() {
   const {
     register,
     handleSubmit,
+    control,
     clearErrors,
     reset,
     watch,
@@ -35,6 +36,11 @@ function App() {
           type="text"
           {...register("name", { required: true })}
           aria-invalid={errors.name ? true : false}
+        />
+        <Controller
+          name="age"
+          control={control}
+          render={({ field }) => <input {...field} />}
         />
         <input type="number" {...register("age")} />
         <button>Отправить</button>
