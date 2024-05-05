@@ -11,6 +11,7 @@ function App() {
     handleSubmit,
     clearErrors,
     reset,
+    watch,
     setValue,
     formState: { errors },
   } = useForm<IMyForm>({
@@ -55,6 +56,7 @@ function App() {
           Установить имя
         </button>
       </form>
+      {watch("age")}
     </>
   );
 }
